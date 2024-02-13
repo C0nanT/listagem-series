@@ -1,23 +1,15 @@
 
 <x-layout title='Séries'>
 
-    <a href='series/criar'>Adicionar série</a>
+    <a href='/series/criar' class='btn btn-dark mb-2'>Adicionar série</a>
 
-    <ul>
+    <ul class='list-group'>
         @foreach($series as $serie)
-            <li>
-                {{$serie}} 
+            <li class='list-group-item'>
+                {{$serie->nome}} 
             </li>
         @endforeach 
 
     </ul>
-
-
-<div class="alert alert-success" role="alert">...</div>
-<div class="alert alert-info" role="alert">...</div>
-<div class="alert alert-warning" role="alert">...</div>
-<div class="alert alert-danger" role="alert">...</div>
-
-
 
 </x-layout>
