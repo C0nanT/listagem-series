@@ -26,18 +26,32 @@ class SeriesController extends Controller
     public function store(Request $request){
 
         $serie = Serie::create($request->all());
-        $request->session()->flash("mensagem.success", "Série -> $serie->nome <- adicionada!");
-        // Serie::create($request->only(['nome']));
-        // Serie::create($request->except(['_token']));
+        $request->session();
 
-        return to_route('series.index');
+        return to_route('series.index')
+            ->with("mensagem.success", "Série -> $serie->nome <- adicionada!");
     }
 
-    public function destroy(Serie $series, Request $request){
+    public function destroy(Serie $series){
 
         $series->delete();
-        $request->session()->flash('mensagem.success', "Série -> $series->nome <- removida!");
 
-        return to_route('series.index');
+        return to_route('series.index')
+            ->with('mensagem.success', "Série -> $series->nome <- removida!");
+    }
+
+    public function edit(Serie $series){
+        
+        return view('series.edit')->with('serie', $series);
+        
+    }
+
+    public function update(Serie $series, Request $request){
+        
+        $series->fill($request->all());
+        $series->save();
+
+        return to_route('series.index')->with('mensagem.success', 'Série editada com sucesso!');
+        
     }
 }
