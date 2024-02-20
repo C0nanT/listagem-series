@@ -9,20 +9,24 @@ use Illuminate\Support\Facades\DB;
 class SeriesController extends Controller
 {
     
-    public function index(){
+    public function index(Request $request){
 
         $series = Serie::query()->orderBy('nome')->get();
 
-        return view('series.index')->with('series', $series);
+        $mensagemSuccess = session('mensagem.success');
+
+        return view('series.index')->with('series', $series)->with('mensagemSuccess', $mensagemSuccess);
     }
 
     public function create(){
+
         return view('series.create');
     }
 
     public function store(Request $request){
 
         Serie::create($request->all());
+        $request->session()->flash('mensagem.success', 'Série adicionada!');
         // Serie::create($request->only(['nome']));
         // Serie::create($request->except(['_token']));
 
@@ -33,6 +37,7 @@ class SeriesController extends Controller
 
         // dd($request->route());
         Serie::destroy($request->series);
+        $request->session()->flash('mensagem.success', 'Série removida!');
 
         return to_route('series.index');
     }
