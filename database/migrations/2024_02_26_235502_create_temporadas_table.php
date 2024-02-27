@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('temporadas', function (Blueprint $table) {
             $table->id();
+            $table->unsignedTinyInteger('numero');
+            $table->foreignId('series_id')->constrained();
             $table->timestamps();
         });
     }
