@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 
-class Serie extends Model
+class Series extends Model
 {
     use HasFactory;
     protected $fillable = ['nome']; 
-    protected $with = ['temporadas'];
+    // protected $with = ['temporada'];
     
-    public function temporadas(){
-        return $this->hasMany(Temporada::class, 'series_id');
+    public function season(){
+        return $this->hasMany(Season::class, 'series_id');
     }
 
     protected static function booted()

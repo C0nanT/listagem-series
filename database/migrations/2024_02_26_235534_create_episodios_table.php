@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('episodios', function (Blueprint $table) {
+        Schema::create('episodes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedTinyInteger('numero');
-            $table->foreignId('temporada_id')->constrained();
+            $table->unsignedTinyInteger('number');
+            $table->foreignId('season_id')->constrained()->onDelete('cascade');
         });
     }
 
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('episodios');
+        Schema::dropIfExists('episodes');
     }
 };
