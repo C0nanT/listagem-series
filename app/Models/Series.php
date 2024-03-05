@@ -13,7 +13,7 @@ class Series extends Model
     protected $fillable = ['nome']; 
     // protected $with = ['temporada'];
     
-    public function season(){
+    public function seasons(){
         return $this->hasMany(Season::class, 'series_id');
     }
 
